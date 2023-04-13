@@ -36,7 +36,6 @@ export function opggCard({
 
   const imgsrc = imgMap.get(tier);
 
-  console.log(imgsrc);
   return `<svg
         xmlns="http://www.w3.org/2000/svg"
         width="332"
@@ -107,6 +106,7 @@ export function opggCard({
             }
           ]]>
         </style>
+        <image src="${imgsrc.src}" width="72" height="72"/>
         <foreignObject x="0" y="0" width="332" height="132">
           <div xmlns="http://www.w3.org/1999/xhtml" class="op-gg-header">
             ${summonerName}
@@ -115,7 +115,7 @@ export function opggCard({
             <div>
               <img
                 class="op-gg-tier-img"
-                src="${imgsrc.src}"
+                src="https://lol-github-profile-n8p742r81-ha4219.vercel.app/assets/bronze.webp"
                 width="72"
                 height="72"
                 alt="tier-image"
