@@ -1,6 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import getSvg from '../../utils/maker';
 import { rankInfo, summoner } from '@/types/res';
 import { opggCard, opggNullCard } from '@/utils/card/opgg';
 
@@ -45,6 +44,5 @@ export default async function handler(
   ).then((res) => res.json());
 
   const card = userInfo.length ? opggCard(userInfo[0]) : nullCard;
-
   return res.end(card);
 }
