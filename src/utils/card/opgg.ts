@@ -1,4 +1,5 @@
 import { rankInfo } from '@/types/res';
+import { hostname } from 'os';
 
 export function opggCard({
   summonerName,
@@ -7,7 +8,8 @@ export function opggCard({
   wins,
   losses,
   leaguePoints,
-}: rankInfo) {
+  hostUrl,
+}: rankInfo & { hostUrl: string }) {
   const tierRank = ['MASTER', 'GRANDMASTER', 'CHALLENGER'].includes(tier)
     ? tier.toLowerCase()
     : `${tier.toLowerCase()} ${rank}`;
@@ -89,7 +91,7 @@ export function opggCard({
             <div>
               <img
                 class="op-gg-tier-img"
-                src="/assets/${tier.toLowerCase()}.webp"
+                src="${hostUrl}/assets/${tier.toLowerCase()}.webp"
                 width="72"
                 height="72"
                 alt="tier-image"
@@ -112,7 +114,7 @@ export function opggCard({
       </svg>`;
 }
 
-export function opggNullCard() {
+export function opggNullCard({ hostUrl }: { hostUrl: string }) {
   return `<svg
     xmlns="http://www.w3.org/2000/svg"
     width="332"
@@ -127,7 +129,7 @@ export function opggNullCard() {
         <div>
           <img
             class="op-gg-tier-img"
-            src="/assets/logow.png"
+            src="${hostUrl}/assets/logow.png"
             width="72"
             height="72"
             alt="tier-image"

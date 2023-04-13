@@ -9,12 +9,13 @@ type Data = {
 
 const API_KEY = process.env.RIOT_API_KEY as string;
 const API_URL = process.env.RIOT_API_URL as string;
+const HOST_URL = process.env.HOST_URL as string;
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>,
 ) {
-  const nullCard = opggNullCard();
+  const nullCard = opggNullCard({ hostUrl: HOST_URL });
   const { name } = req.query;
 
   res.statusCode = 200;
@@ -43,6 +44,8 @@ export default async function handler(
     },
   ).then((res) => res.json());
 
-  const card = userInfo.length ? opggCard(userInfo[0]) : nullCard;
+  const card = userInfo.length
+    ? opggCard({ ...userInfo[0], hostUrl: HOST_URL })
+    : nullCard;
   return res.end(card);
 }
