@@ -1,14 +1,5 @@
 import { rankInfo } from '@/types/res';
-import Iron from '@/assets/iron.webp';
-import Bronze from '@/assets/bronze.webp';
-import Silver from '@/assets/silver.webp';
-import Gold from '@/assets/gold.webp';
-import Platinum from '@/assets/platinum.webp';
-import Diamond from '@/assets/diamond.webp';
-import Master from '@/assets/master.webp';
-import GrandMaster from '@/assets/grandmaster.webp';
-import Challenger from '@/assets/challenger.webp';
-import LogoW from '@/assets/logow.png';
+import { getBronzeImg } from '../imgLoader';
 
 export function opggCard({
   summonerName,
@@ -18,23 +9,9 @@ export function opggCard({
   losses,
   leaguePoints,
 }: rankInfo) {
-  const imgMap = new Map();
-
-  imgMap.set('IRON', Iron);
-  imgMap.set('BRONZE', Bronze);
-  imgMap.set('SILVER', Silver);
-  imgMap.set('GOLD', Gold);
-  imgMap.set('PLATINUM', Platinum);
-  imgMap.set('DIAMOND', Diamond);
-  imgMap.set('MASTER', Master);
-  imgMap.set('GRANDMASTER', GrandMaster);
-  imgMap.set('CHALLENGER', Challenger);
-
   const tierRank = ['MASTER', 'GRANDMASTER', 'CHALLENGER'].includes(tier)
     ? tier.toLowerCase()
     : `${tier.toLowerCase()} ${rank}`;
-
-  const imgsrc = imgMap.get(tier);
 
   return `<svg
         xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +83,6 @@ export function opggCard({
             }
           ]]>
         </style>
-        <image src="${imgsrc.src}" width="72" height="72"/>
         <foreignObject x="0" y="0" width="332" height="132">
           <div xmlns="http://www.w3.org/1999/xhtml" class="op-gg-header">
             ${summonerName}
@@ -115,7 +91,7 @@ export function opggCard({
             <div>
               <img
                 class="op-gg-tier-img"
-                src="https://lol-github-profile-n8p742r81-ha4219.vercel.app/assets/bronze.webp"
+                src="${getBronzeImg()}"
                 width="72"
                 height="72"
                 alt="tier-image"
@@ -153,7 +129,7 @@ export function opggNullCard() {
         <div>
           <img
             class="op-gg-tier-img"
-            src="${LogoW.src}"
+            src="${''}"
             width="72"
             height="72"
             alt="tier-image"
