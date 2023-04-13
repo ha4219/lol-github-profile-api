@@ -96,8 +96,8 @@ export function opggCard({
                 class="op-gg-tier-img"
                 src="${
                   imgLoader.get(tier)
-                    ? imgLoader.get(tier)
-                    : imgLoader.get(DEFAULT)
+                    ? imgLoader.get(tier)()
+                    : imgLoader.get(DEFAULT)()
                 }"
                 width="72"
                 height="72"
@@ -202,7 +202,7 @@ export function opggNullCard() {
         <div>
           <img
             class="op-gg-tier-img"
-            src="${imgLoader.get(DEFAULT)}"
+            src="${imgLoader.get(DEFAULT)()}"
             width="72"
             height="72"
             alt="tier-image"
