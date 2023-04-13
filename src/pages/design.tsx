@@ -1,37 +1,85 @@
 import { rankInfo, summoner } from '@/types/res';
 
-export default function DesignPage({
-  userInfo,
-  so,
-}: {
-  userInfo: rankInfo[];
-  so: summoner;
-}) {
-  const name = userInfo[0].summonerName;
-  const rank = userInfo[0].rank;
-  const tier = userInfo[0].tier;
+export default function DesignPage({ userInfo }: { userInfo: rankInfo[] }) {
+  if (userInfo.length) {
+    const { summonerName, rank, tier, leaguePoints, wins, losses } =
+      userInfo[0];
+    const tierRank = ['MASTER', 'GRANDMASTER', 'CHALLENGER'].includes(tier)
+      ? tier.toLowerCase()
+      : `${tier.toLowerCase()} ${rank}`;
 
-  return (
-    <>
+    return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 240 120"
-        width="240"
-        height="120"
+        width="332"
+        height="132"
+        className="op-gg-card"
       >
-        <text x={10} y={20}>
-          {name}
-        </text>
-        <line x1={0} x2={240} y1={30} y2={30} stroke="gray" />
-        <image
-          href="https://opgg-static.akamaized.net/images/medals_new/challenger.png?image=q_auto,f_webp,w_144&v=1681307259203"
-          width={72}
-          height={72}
-          y={20}
-        />
+        <foreignObject x={0} y={0} width={332} height={132}>
+          <div xmlns="http://www.w3.org/1999/xhtml" className="op-gg-header">
+            {summonerName}
+          </div>
+          <div xmlns="http://www.w3.org/1999/xhtml" className="op-gg-content">
+            <div>
+              <img
+                className="op-gg-tier-img"
+                src={`/assets/${tier.toLowerCase()}.webp`}
+                width={72}
+                height={72}
+                alt="tier-image"
+              />
+            </div>
+            <div className="op-gg-info">
+              <div className="tier">{tierRank}</div>
+              <div className="lp">{leaguePoints}LP</div>
+            </div>
+            <div className="op-gg-win-loss-container">
+              <div className="win-loss">
+                {wins}W {losses}L
+              </div>
+              <div className="ratio">
+                Win Rate {Math.round((wins / (wins + losses)) * 100)}%
+              </div>
+            </div>
+          </div>
+        </foreignObject>
       </svg>
-    </>
-  );
+    );
+  } else {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="332"
+        height="132"
+        className="op-gg-card"
+      >
+        <foreignObject x={0} y={0} width={332} height={132}>
+          <div xmlns="http://www.w3.org/1999/xhtml" className="op-gg-header">
+            Not Found
+          </div>
+          <div xmlns="http://www.w3.org/1999/xhtml" className="op-gg-content">
+            <div>
+              <img
+                className="op-gg-tier-img"
+                src={`/assets/logow.png`}
+                width={72}
+                height={72}
+                alt="tier-image"
+              />
+            </div>
+            <div className="op-gg-info">
+              <div className="tier">error</div>
+              <div className="lp">error</div>
+            </div>
+            <div className="op-gg-win-loss-container">
+              <div className="win-loss">Error</div>
+              <div className="ratio">Error</div>
+            </div>
+          </div>
+        </foreignObject>
+      </svg>
+    );
+  }
 }
 
 export async function getServerSideProps() {
@@ -39,7 +87,7 @@ export async function getServerSideProps() {
   const API_URL = process.env.RIOT_API_URL as string;
 
   const so: summoner = await fetch(
-    `${API_URL}/summoner/v4/summoners/by-name/괴물쥐`,
+    `${API_URL}/summoner/v4/summoners/by-name/hide on bush`,
     {
       headers: {
         'X-Riot-Token': API_KEY,
@@ -57,7 +105,6 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      so,
       userInfo,
     },
   };
