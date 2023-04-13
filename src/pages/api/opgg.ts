@@ -15,7 +15,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>,
 ) {
-  const nullCard = opggNullCard({ hostUrl: HOST_URL });
+  const nullCard = opggNullCard();
   const { name } = req.query;
 
   res.statusCode = 200;
@@ -44,8 +44,6 @@ export default async function handler(
     },
   ).then((res) => res.json());
 
-  const card = userInfo.length
-    ? opggCard({ ...userInfo[0], hostUrl: HOST_URL })
-    : nullCard;
+  const card = userInfo.length ? opggCard({ ...userInfo[0] }) : nullCard;
   return res.end(card);
 }
