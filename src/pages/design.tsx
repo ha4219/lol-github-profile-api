@@ -16,10 +16,8 @@ export default function DesignPage({ userInfo }: { userInfo: rankInfo[] }) {
         className="op-gg-card"
       >
         <foreignObject x={0} y={0} width={332} height={132}>
-          <div xmlns="http://www.w3.org/1999/xhtml" className="op-gg-header">
-            {summonerName}
-          </div>
-          <div xmlns="http://www.w3.org/1999/xhtml" className="op-gg-content">
+          <div className="op-gg-header">{summonerName}</div>
+          <div className="op-gg-content">
             <div>
               <img
                 className="op-gg-tier-img"
@@ -54,10 +52,8 @@ export default function DesignPage({ userInfo }: { userInfo: rankInfo[] }) {
         className="op-gg-card"
       >
         <foreignObject x={0} y={0} width={332} height={132}>
-          <div xmlns="http://www.w3.org/1999/xhtml" className="op-gg-header">
-            Not Found
-          </div>
-          <div xmlns="http://www.w3.org/1999/xhtml" className="op-gg-content">
+          <div className="op-gg-header">Not Found</div>
+          <div className="op-gg-content">
             <div>
               <img
                 className="op-gg-tier-img"

@@ -1,8 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import getSvg from '../utils/maker';
+import getSvg from '../../utils/maker';
 import { rankInfo, summoner } from '@/types/res';
-import { opggCard, opggNullCard } from '../utils/card/opgg';
+import { opggCard, opggNullCard } from '@/utils/card/opgg';
 
 type Data = {
   name: string;
