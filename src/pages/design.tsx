@@ -1,25 +1,48 @@
+import SEO from '@/components/SEO';
+import SearchForm from '@/components/SearchForm';
 import { rankInfo, summoner } from '@/types/res';
 import { opggCard, opggNullCard } from '@/utils/card/opgg';
+import { useRouter } from 'next/router';
 
 export default function DesignPage({ userInfo }: { userInfo: rankInfo[] }) {
-  console.log(userInfo);
+  const router = useRouter();
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const target = e.target as typeof e.target & {
+      search: { value: string };
+    };
+    if (!target.search.value) return;
+    router.push({
+      pathname: `/design`,
+      query: { search: target.search.value },
+    });
+  };
+
   return (
     <>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: userInfo.length ? opggCard(userInfo[0]) : opggNullCard(),
-        }}
-      />
+      <SEO />
+      <SearchForm handleSubmit={handleSubmit} />
+      {userInfo.map((item) => (
+        <div
+          key={item.summonerId}
+          dangerouslySetInnerHTML={{
+            __html: userInfo.length ? opggCard(item) : opggNullCard(),
+          }}
+        />
+      ))}
     </>
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context: {
+  query: { search: string };
+}) {
+  const { search } = context.query;
   const API_KEY = process.env.RIOT_API_KEY as string;
   const API_URL = process.env.RIOT_API_URL as string;
 
   const so: summoner = await fetch(
-    `${API_URL}/summoner/v4/summoners/by-name/hide on bush`,
+    `${API_URL}/summoner/v4/summoners/by-name/${search}`,
     {
       headers: {
         'X-Riot-Token': API_KEY,
