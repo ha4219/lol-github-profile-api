@@ -14,7 +14,7 @@ export function opggCard({
     ? tier.toLowerCase()
     : `${tier.toLowerCase()} ${rank}`;
 
-  const imgSrc = getTierImg({ tier });
+  const imgSrc = getTierImg(tier);
 
   return `<svg
         xmlns="http://www.w3.org/2000/svg"

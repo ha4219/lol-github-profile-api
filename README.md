@@ -1,6 +1,7 @@
 # lol-github-profile-api
 
 ![hideonbush](https://lol-github-profile-api.vercel.app/api/opgg?name=hideonbush)
-![hideonbush](https://lol-github-profile-api.vercel.app/api/opgg?name=quad)
-![hideonbush](https://lol-github-profile-api.vercel.app/api/opgg?name=deftdk)
-![hideonbush](https://lol-github-profile-api.vercel.app/api/opgg?name=viper3)
+![quad](https://lol-github-profile-api.vercel.app/api/opgg?name=quad)
+![deftdk](https://lol-github-profile-api.vercel.app/api/opgg?name=deftdk)
+![viper3](https://lol-github-profile-api.vercel.app/api/opgg?name=viper3)
+![KDF1](https://lol-github-profile-api.vercel.app/api/opgg?name=KDF1)
