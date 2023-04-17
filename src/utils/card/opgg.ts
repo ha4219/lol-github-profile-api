@@ -1,6 +1,6 @@
 import { rankInfo } from '@/types/res';
-import { getBronzeImg, getImgMap } from '../imgLoader';
 import { DEFAULT } from '@/contants';
+import { getTierImg } from '../imgLoader';
 
 export function opggCard({
   summonerName,
@@ -14,7 +14,7 @@ export function opggCard({
     ? tier.toLowerCase()
     : `${tier.toLowerCase()} ${rank}`;
 
-  const imgLoader = getImgMap();
+  const imgSrc = getTierImg({ tier });
 
   return `<svg
         xmlns="http://www.w3.org/2000/svg"
@@ -94,11 +94,7 @@ export function opggCard({
             <div>
               <img
                 class="op-gg-tier-img"
-                src="${
-                  imgLoader.get(tier)
-                    ? imgLoader.get(tier)()
-                    : imgLoader.get(DEFAULT)()
-                }"
+                src="${imgSrc}"
                 width="72"
                 height="72"
                 alt="tier-image"
@@ -122,7 +118,7 @@ export function opggCard({
 }
 
 export function opggNullCard() {
-  const imgLoader = getImgMap();
+  const imgSrc = getTierImg({ tier: null });
 
   return `<svg
     xmlns="http://www.w3.org/2000/svg"
@@ -202,7 +198,7 @@ export function opggNullCard() {
         <div>
           <img
             class="op-gg-tier-img"
-            src="${imgLoader.get(DEFAULT)()}"
+            src="${imgSrc}"
             width="72"
             height="72"
             alt="tier-image"

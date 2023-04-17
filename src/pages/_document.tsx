@@ -4,8 +4,10 @@ export default function Document() {
   return (
     <Html>
       <Head />
-      <Main />
-      <NextScript />
+      <body className="container mx-auto dark:bg-gray-900 py-10">
+        <Main />
+        <NextScript />
+      </body>
     </Html>
   );
 }

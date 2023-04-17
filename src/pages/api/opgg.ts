@@ -22,7 +22,7 @@ export default async function handler(
   res.setHeader('Content-Type', 'image/svg+xml');
   res.setHeader(
     'Cache-Control',
-    'public, immutable, no-transform, s-maxage=31536000, max-age=31536000',
+    'public, immutable, no-transform, max-age=3600',
   );
 
   if (!name) return res.end(nullCard);
