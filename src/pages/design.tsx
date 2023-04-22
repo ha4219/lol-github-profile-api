@@ -2,6 +2,7 @@ import SEO from '@/components/SEO';
 import SearchForm from '@/components/SearchForm';
 import { rankInfo, summoner } from '@/types/res';
 import { opggCard, opggNullCard } from '@/utils/card/opgg';
+import { sovledDotAcCard } from '@/utils/card/solvedDotAc';
 import { useRouter } from 'next/router';
 
 export default function DesignPage({ userInfo }: { userInfo: rankInfo[] }) {
@@ -22,14 +23,23 @@ export default function DesignPage({ userInfo }: { userInfo: rankInfo[] }) {
     <>
       <SEO />
       <SearchForm handleSubmit={handleSubmit} />
-      {userInfo.map((item) => (
-        <div
-          key={item.summonerId}
-          dangerouslySetInnerHTML={{
-            __html: userInfo.length ? opggCard(item) : opggNullCard(),
-          }}
-        />
-      ))}
+      {userInfo &&
+        userInfo.map((item) => (
+          <>
+            <div
+              key={item.summonerId}
+              dangerouslySetInnerHTML={{
+                __html: userInfo.length ? opggCard(item) : opggNullCard(),
+              }}
+            />
+            <div
+              key={item.summonerId}
+              dangerouslySetInnerHTML={{
+                __html: sovledDotAcCard(item),
+              }}
+            />
+          </>
+        ))}
     </>
   );
 }

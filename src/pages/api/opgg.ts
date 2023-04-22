@@ -9,7 +9,6 @@ type Data = {
 
 const API_KEY = process.env.RIOT_API_KEY as string;
 const API_URL = process.env.RIOT_API_URL as string;
-const HOST_URL = process.env.HOST_URL as string;
 
 export default async function handler(
   req: NextApiRequest,
