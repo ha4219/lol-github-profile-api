@@ -1,6 +1,9 @@
-import { OpggCard } from './opgg';
-import { SovledDotAcCard } from './solvedDotAc';
+import { OpggCard, OpggNullCard } from './opgg';
+import { SovledDotAcCard, SovledDotAcNullCard } from './solvedDotAc';
 
-const cards = [OpggCard, SovledDotAcCard];
+const cards = [
+  { Main: OpggCard, Null: OpggNullCard },
+  { Main: SovledDotAcCard, Null: SovledDotAcNullCard },
+];
 
 export default cards;

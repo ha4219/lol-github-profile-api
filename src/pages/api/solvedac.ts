@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { QueueType, rankInfo, summoner } from '@/types/res';
-import { OpggCard, OpggNullCard } from '@/utils/card/opgg';
+import { SovledDotAcCard, SovledDotAcNullCard } from '@/utils/card/solvedDotAc';
 import { renderToString } from 'react-dom/server';
 import { renderStylesToString } from '@emotion/server';
 
@@ -16,7 +16,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>,
 ) {
-  const nullCard = renderStylesToString(renderToString(OpggNullCard()));
+  const nullCard = renderStylesToString(renderToString(SovledDotAcNullCard()));
   const { name } = req.query;
   const queueType = req.query.queueType ?? ('RANKED_SOLO_5x5' as QueueType);
 
@@ -50,7 +50,7 @@ export default async function handler(
   // renderToString(opggCard({ ...userInfo[0] }));
 
   const card = user
-    ? renderStylesToString(renderToString(OpggCard({ ...user })))
+    ? renderStylesToString(renderToString(SovledDotAcCard({ ...user })))
     : nullCard;
   return res.end(card);
 }

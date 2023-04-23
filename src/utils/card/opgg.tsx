@@ -156,16 +156,16 @@ export function OpggNullCard() {
         <circle cx={48} cy={81} r={36} />
         <image href={imgSrc} width={72} height={72} x={12} y={45} />
         <g className="group">
-          <text x={100} y={75} className="tier">
+          <text x={100} y={75} className="tier item">
             Error
           </text>
-          <text x={100} y={100} className="lp">
+          <text x={100} y={100} className="lp item">
             Error
           </text>
-          <text x={248} y={75} className="win-loss">
+          <text x={248} y={75} className="win-loss item">
             Error
           </text>
-          <text x={248} y={100} className="ratio">
+          <text x={248} y={100} className="ratio item">
             Error
           </text>
         </g>

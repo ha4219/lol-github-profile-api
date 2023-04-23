@@ -7,10 +7,11 @@ export interface summoner {
   revisionDate: number;
   summonerLevel: number;
 }
+export type QueueType = 'RANKED_FLEX_SR' | 'RANKED_SOLO_5x5';
 
 export interface rankInfo {
   leagueId: string;
-  queueType: string;
+  queueType: QueueType;
   tier: string;
   rank: string;
   summonerId: string;

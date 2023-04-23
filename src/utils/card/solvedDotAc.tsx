@@ -218,7 +218,7 @@ export function SovledDotAcCard({
           alignmentBaseline="middle"
           className="percentage"
         >
-          {over ? `${leaguePoints}LP` : `${leaguePoints}%`}
+          {over ? `${leaguePoints} LP` : `${leaguePoints}%`}
         </text>
         {!over && (
           <text
@@ -231,6 +231,124 @@ export function SovledDotAcCard({
             {`${leaguePoints}/100`}
           </text>
         )}
+      </Container>
+    </svg>
+  );
+}
+
+export function SovledDotAcNullCard() {
+  const bg = BACKGROUND_COLOR.Unknown;
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="350"
+      height="170"
+      className="op-gg-card"
+    >
+      <Container>
+        <defs xmlns="http://www.w3.org/2000/svg">
+          <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="35%">
+            <stop offset="10%" stopColor={bg[0]} />
+            <stop offset="55%" stopColor={bg[1]} />
+            <stop offset="100%" stopColor={bg[2]} />
+          </linearGradient>
+        </defs>
+        <rect
+          xmlns="http://www.w3.org/2000/svg"
+          width="350"
+          height="170"
+          rx="10"
+          ry="10"
+          className="background"
+        />
+        <text
+          xmlns="http://www.w3.org/2000/svg"
+          x="315"
+          y="50"
+          className="tier-text"
+          textAnchor="end"
+        >
+          Error
+        </text>
+        <text
+          xmlns="http://www.w3.org/2000/svg"
+          x="35"
+          y="50"
+          className="boj-handle"
+        >
+          Not Found
+        </text>
+        <g
+          xmlns="http://www.w3.org/2000/svg"
+          className="item"
+          style={{ animationDelay: '200ms' }}
+        >
+          <text x="35" y="79" className="subtitle">
+            rate
+          </text>
+          <text x="145" y="79" className="rate value">
+            Error
+          </text>
+        </g>
+        <g
+          xmlns="http://www.w3.org/2000/svg"
+          className="item"
+          style={{ animationDelay: '400ms' }}
+        >
+          <text x="35" y="99" className="subtitle">
+            wins
+          </text>
+          <text x="145" y="99" className="solved value">
+            Error
+          </text>
+        </g>
+        <g
+          xmlns="http://www.w3.org/2000/svg"
+          className="item"
+          style={{ animationDelay: '600ms' }}
+        >
+          <text x="35" y="119" className="subtitle">
+            losses
+          </text>
+          <text x="145" y="119" className="class value">
+            Error
+          </text>
+        </g>
+        <g
+          xmlns="http://www.w3.org/2000/svg"
+          // className="rate-bar"
+          style={{ animationDelay: '800ms' }}
+        >
+          <line
+            x1="35"
+            y1="142"
+            x2={290}
+            y2="142"
+            strokeWidth="4"
+            stroke="floralwhite"
+            strokeLinecap="round"
+          />
+        </g>
+        <line
+          xmlns="http://www.w3.org/2000/svg"
+          x1="35"
+          y1="142"
+          x2="290"
+          y2="142"
+          strokeWidth="4"
+          strokeOpacity="40%"
+          stroke="floralwhite"
+          strokeLinecap="round"
+        />
+        <text
+          xmlns="http://www.w3.org/2000/svg"
+          x="297"
+          y="142"
+          alignmentBaseline="middle"
+          className="percentage"
+        >
+          Error
+        </text>
       </Container>
     </svg>
   );

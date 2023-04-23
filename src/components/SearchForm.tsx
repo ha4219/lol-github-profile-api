@@ -1,7 +1,13 @@
+import styled from '@emotion/styled';
+import { useState } from 'react';
+
+const Container = styled.form``;
+
 export default function SearchForm({ handleSubmit }: { handleSubmit: any }) {
+  const [open, setOpen] = useState(false);
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <Container onSubmit={handleSubmit}>
         <div className="flex">
           <label
             htmlFor="search-dropdown"
@@ -104,7 +110,7 @@ export default function SearchForm({ handleSubmit }: { handleSubmit: any }) {
             </button>
           </div>
         </div>
-      </form>
+      </Container>
     </>
   );
 }
