@@ -26,7 +26,6 @@ export default async function handler(
     'Cache-Control',
     'public, immutable, no-transform, max-age=3600',
   );
-
   if (!name) return res.end(nullCard);
 
   const so: summoner = await fetch(

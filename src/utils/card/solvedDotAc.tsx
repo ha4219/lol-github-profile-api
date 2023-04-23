@@ -15,7 +15,6 @@ const BACKGROUND_COLOR = {
 };
 
 const Container = styled.g`
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=block');
   @keyframes delayFadeIn {
     0% {
       opacity: 0;
@@ -110,12 +109,7 @@ export function SovledDotAcCard({
     : BACKGROUND_COLOR.Unknown;
 
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="350"
-      height="170"
-      className="op-gg-card"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="350" height="170">
       <Container>
         <defs xmlns="http://www.w3.org/2000/svg">
           <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="35%">
