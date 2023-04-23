@@ -26,10 +26,10 @@ export function sovledDotAcCard({
     : `${tier.toLowerCase()} ${rank}`;
 
   const imgSrc = getTierImg(tier);
-  const bg = BACKGROUND_COLOR[tier]
-    ? BACKGROUND_COLOR[tier]
+  const bgMap = new Map(Object.entries(BACKGROUND_COLOR));
+  const bg: string[] = bgMap.get(tier)
+    ? (bgMap.get(tier) as string[])
     : BACKGROUND_COLOR.Unknown;
-  console.log(bg);
 
   return `<svg
         xmlns="http://www.w3.org/2000/svg"
