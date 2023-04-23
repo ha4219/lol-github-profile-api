@@ -15,6 +15,7 @@ const BACKGROUND_COLOR = {
 };
 
 const Container = styled.g`
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=block');
   @keyframes delayFadeIn {
     0% {
       opacity: 0;
