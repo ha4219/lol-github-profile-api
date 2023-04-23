@@ -1,9 +1,11 @@
 import SEO from '@/components/SEO';
 import SearchForm from '@/components/SearchForm';
 import { rankInfo, summoner } from '@/types/res';
-import { opggCard, opggNullCard } from '@/utils/card/opgg';
-import { sovledDotAcCard } from '@/utils/card/solvedDotAc';
+import cards from '@/utils/card/cards';
+import { OpggCard } from '@/utils/card/opgg';
+import { renderStylesToString } from '@emotion/server';
 import { useRouter } from 'next/router';
+import { renderToString } from 'react-dom/server';
 
 export default function DesignPage({ userInfo }: { userInfo: rankInfo[] }) {
   const router = useRouter();
@@ -23,23 +25,21 @@ export default function DesignPage({ userInfo }: { userInfo: rankInfo[] }) {
     <>
       <SEO />
       <SearchForm handleSubmit={handleSubmit} />
-      {userInfo &&
-        userInfo.map((item) => (
-          <>
+      {userInfo.map(
+        (item) => {
+          return cards.map((Card) => (
             <div
-              key={item.summonerId}
+              key={item.leagueId + Card.name}
               dangerouslySetInnerHTML={{
-                __html: userInfo.length ? opggCard(item) : opggNullCard(),
+                __html: renderStylesToString(
+                  renderToString(<Card {...item} />),
+                ),
               }}
             />
-            <div
-              key={item.summonerId}
-              dangerouslySetInnerHTML={{
-                __html: sovledDotAcCard(item),
-              }}
-            />
-          </>
-        ))}
+          ));
+        },
+        // )),
+      )}
     </>
   );
 }

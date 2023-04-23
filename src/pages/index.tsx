@@ -18,9 +18,7 @@ export default function Home() {
   return (
     <>
       <SEO />
-      <>
-        <SearchForm handleSubmit={handleSubmit} />
-      </>
+      <SearchForm handleSubmit={handleSubmit} />
     </>
   );
 }

@@ -1,7 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { rankInfo, summoner } from '@/types/res';
-import { opggCard, opggNullCard } from '@/utils/card/opgg';
+import { OpggCard, OpggNullCard } from '@/utils/card/opgg';
+import { renderToString } from 'react-dom/server';
+import { renderStylesToString } from '@emotion/server';
+import { opggCard } from '@/utils/card/opgg-copy';
 
 type Data = {
   name: string;
@@ -14,7 +17,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>,
 ) {
-  const nullCard = opggNullCard();
+  const nullCard = renderStylesToString(renderToString(OpggNullCard()));
   const { name } = req.query;
 
   res.statusCode = 200;
@@ -42,7 +45,10 @@ export default async function handler(
       },
     },
   ).then((res) => res.json());
+  // renderToString(opggCard({ ...userInfo[0] }));
 
-  const card = userInfo.length ? opggCard({ ...userInfo[0] }) : nullCard;
+  const card = userInfo?.length
+    ? renderStylesToString(renderToString(OpggCard({ ...userInfo[0] })))
+    : nullCard;
   return res.end(card);
 }
