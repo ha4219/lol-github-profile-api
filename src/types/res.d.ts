@@ -7,7 +7,7 @@ export interface summoner {
   revisionDate: number;
   summonerLevel: number;
 }
-export type QueueType = 'RANKED_FLEX_SR' | 'RANKED_SOLO_5x5';
+export type QueueType = 'RANKED_FLEX_SR' | 'RANKED_SOLO_5x5' | 'RANKED_TFT';
 
 export interface rankInfo {
   leagueId: string;

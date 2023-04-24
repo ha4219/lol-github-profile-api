@@ -51,7 +51,7 @@ export async function getServerSideProps(context: {
 
   try {
     const so: summoner = await fetch(
-      `${API_URL}/summoner/v4/summoners/by-name/${search}`,
+      `${API_URL}/lol/summoner/v4/summoners/by-name/${search}`,
       {
         headers: {
           'X-Riot-Token': API_KEY,
@@ -59,7 +59,7 @@ export async function getServerSideProps(context: {
       },
     ).then((res) => res.json());
     const userInfo: rankInfo[] = await fetch(
-      `${API_URL}/league/v4/entries/by-summoner/${so.id}`,
+      `${API_URL}/lol/league/v4/entries/by-summoner/${so.id}`,
       {
         headers: {
           'X-Riot-Token': API_KEY,

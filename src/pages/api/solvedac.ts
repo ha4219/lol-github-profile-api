@@ -9,6 +9,7 @@ type Data = {
   name: string;
 };
 
+const tft: QueueType = 'RANKED_TFT';
 const API_KEY = process.env.RIOT_API_KEY as string;
 const API_URL = process.env.RIOT_API_URL as string;
 
@@ -18,7 +19,8 @@ export default async function handler(
 ) {
   const nullCard = renderStylesToString(renderToString(SovledDotAcNullCard()));
   const { name } = req.query;
-  const queueType = req.query.queueType ?? ('RANKED_SOLO_5x5' as QueueType);
+  const queueType: QueueType =
+    (req.query.queueType as QueueType) ?? ('RANKED_SOLO_5x5' as QueueType);
 
   res.statusCode = 200;
   res.setHeader('Content-Type', 'image/svg+xml');
@@ -29,7 +31,7 @@ export default async function handler(
   if (!name) return res.end(nullCard);
 
   const so: summoner = await fetch(
-    `${API_URL}/summoner/v4/summoners/by-name/${name}`,
+    `${API_URL}/lol/summoner/v4/summoners/by-name/${name}`,
     {
       headers: {
         'X-Riot-Token': API_KEY,
@@ -37,7 +39,9 @@ export default async function handler(
     },
   ).then((res) => res.json());
   const userInfo: rankInfo[] = await fetch(
-    `${API_URL}/league/v4/entries/by-summoner/${so.id}`,
+    queueType !== tft
+      ? `${API_URL}/lol/league/v4/entries/by-summoner/${so.id}`
+      : `${API_URL}/tft/league/v1/entries/by-summoner/${so.id}`,
     {
       headers: {
         'X-Riot-Token': API_KEY,
