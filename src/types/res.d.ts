@@ -1,7 +1,7 @@
 export interface summoner {
   id: string;
   accountId: string;
-  pudid: string;
+  puuid: string;
   name: string;
   profileIconId: number;
   revisionDate: number;
@@ -24,3 +24,6 @@ export interface rankInfo {
   freshBlood: boolean;
   hotStreak: boolean;
 }
+
+export type MatchData = string[];
+export type MatchDetail = {};

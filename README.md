@@ -1,6 +1,9 @@
 # lol-github-profile-api
 
-## test
+## TODO
+
+- [ ] make opgg summarization card
+- [ ] connect cache server
 
 ## op.gg
 

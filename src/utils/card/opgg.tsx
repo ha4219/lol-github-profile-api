@@ -1,6 +1,7 @@
 import { rankInfo } from '@/types/res';
 import { getTierImg } from '../imgLoader';
 import styled from '@emotion/styled';
+import { champions } from '../championImgLoader';
 
 const Container = styled.g`
   font-family: Roboto, sans-serif;
@@ -187,27 +188,7 @@ export function SummaryBox() {
         y={0}
         width={332}
         height={132}
-        href="https://opgg-static.akamaized.net/meta/images/lol/champion/Tristana.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_48&amp;v=1681967972545"
-      />
-    </svg>
-  );
-}
-
-export function SummaryBox1() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="332"
-      height="132"
-      viewBox="0 0 332 132"
-    >
-      <image
-        x={0}
-        y={0}
-        width={332}
-        height={132}
-        crossOrigin="anonymous"
-        href="https://opgg-static.akamaized.net/meta/images/lol/champion/Tristana.png?image=c_crop,h_103,w_103,x_9,y_9/q_auto,f_webp,w_48&amp;v=1681967972545"
+        href={`data:image/png;base64,${champions.Ahri}`}
       />
     </svg>
   );
