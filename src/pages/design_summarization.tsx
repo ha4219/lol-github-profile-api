@@ -6,8 +6,39 @@ import { renderStylesToString } from '@emotion/server';
 import { useRouter } from 'next/router';
 import { renderToString } from 'react-dom/server';
 import type { QueueType } from '@/types/res';
+import { champions } from '@/utils/championImgLoader';
 
-export default function DesignPage() {
+interface ChampionType {
+  name: string;
+  wins: number;
+  losses: number;
+  kills: number;
+  assits: number;
+  deaths: number;
+}
+
+interface OpggSummarizationType {
+  wins: number;
+  losses: number;
+  kills: number;
+  deaths: number;
+  assists: number;
+  roles: number[];
+  champions: Map<string, ChampionType>;
+}
+
+interface OpggSummarization1Type {
+  wins: number;
+  losses: number;
+  kills: number;
+  deaths: number;
+  assists: number;
+  roles: number[];
+  champions: ChampionType[];
+}
+
+export default function DesignPage({ res }: { res: OpggSummarization1Type }) {
+  console.log(res);
   const router = useRouter();
   // const queueType = router.query.queueType ?? ('RANKED_SOLO_5x5' as QueueType);
   const handleSubmit = (e: React.SyntheticEvent) => {
@@ -70,7 +101,6 @@ export async function getServerSideProps(context: {
     new Promise((resolve) => setTimeout(resolve, ms));
 
   try {
-    console.log(matchInfo);
     // const r = await Promise.all(
     //   matchInfo.map(async (matchId: string) => {
     //     await sleep(100);
@@ -117,10 +147,70 @@ export async function getServerSideProps(context: {
       assists: item.assists,
       position: item.individualPosition,
     }));
-    console.log(items);
-    console.log(items.reduce((acc, cur) => acc + cur.kills, 0));
+
+    const v = items.reduce(
+      (acc, cur) => {
+        const prev = { ...acc };
+        cur.win ? (prev.wins += 1) : (prev.losses += 1);
+        prev.kills += cur.kills;
+        prev.deaths += cur.deaths;
+        prev.assists += cur.assists;
+        const idx = (): number => {
+          switch (cur.position) {
+            case 'TOP':
+              return 0;
+            case 'JUNGLE':
+              return 1;
+            case 'MIDDLE':
+              return 2;
+            case 'BOT':
+              return 3;
+            case 'UTILITY':
+              return 4;
+          }
+          return 5;
+        };
+        prev.roles[idx()] += 1;
+
+        const key = prev.champions.get(cur.champion);
+        const champ = key ?? {
+          name: cur.champion,
+          wins: 0,
+          losses: 0,
+          kills: 0,
+          assits: 0,
+          deaths: 0,
+        };
+
+        cur.win ? (champ.wins += 1) : (champ.losses += 1);
+        champ.kills += cur.kills;
+        champ.deaths += cur.deaths;
+        champ.assits += cur.assists;
+        prev.champions.set(cur.champion, champ);
+        return prev;
+      },
+      {
+        wins: 0,
+        losses: 0,
+        kills: 0,
+        deaths: 0,
+        assists: 0,
+        roles: [0, 0, 0, 0, 0, 0],
+        champions: new Map(),
+      } as OpggSummarizationType,
+    );
+
+    return {
+      props: {
+        res: { ...v, champions: [...v.champions.values()] },
+      },
+    };
   } catch (e) {
-    console.log('eee', e);
+    return {
+      props: {
+        res: null,
+      },
+    };
   }
 
   // const l = res.info.participants
@@ -132,9 +222,4 @@ export async function getServerSideProps(context: {
   //     deaths: item.deaths,
   //     assists: item.assists,
   //   }));
-  return {
-    props: {
-      matchInfo,
-    },
-  };
 }
