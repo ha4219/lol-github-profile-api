@@ -1,7 +1,6 @@
 import { rankInfo } from '@/types/res';
 import { getTierImg } from '../imgLoader';
 import styled from '@emotion/styled';
-import { champions } from '../championImgLoader';
 
 const Container = styled.g`
   font-family: Roboto, sans-serif;
@@ -171,25 +170,6 @@ export function OpggNullCard() {
           </text>
         </g>
       </Container>
-    </svg>
-  );
-}
-
-export function SummaryBox() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="332"
-      height="132"
-      viewBox="0 0 332 132"
-    >
-      <image
-        x={0}
-        y={0}
-        width={332}
-        height={132}
-        href={`data:image/png;base64,${champions.Ahri}`}
-      />
     </svg>
   );
 }

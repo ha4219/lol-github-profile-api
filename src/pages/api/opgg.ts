@@ -9,8 +9,6 @@ type Data = {
   name: string;
 };
 
-const tft: QueueType = 'RANKED_TFT';
-
 const API_KEY = process.env.RIOT_API_KEY as string;
 const API_URL = process.env.RIOT_API_URL as string;
 
@@ -41,9 +39,7 @@ export default async function handler(
     },
   ).then((res) => res.json());
   const userInfo: rankInfo[] = await fetch(
-    queueType !== tft
-      ? `${API_URL}/lol/league/v4/entries/by-summoner/${so.id}`
-      : `${API_URL}/tft/league/v1/entries/by-summoner/${so.id}`,
+    `${API_URL}/lol/league/v4/entries/by-summoner/${so.id}`,
     {
       headers: {
         'X-Riot-Token': API_KEY,

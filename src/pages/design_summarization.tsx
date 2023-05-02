@@ -1,44 +1,20 @@
 import SEO from '@/components/SEO';
 import SearchForm from '@/components/SearchForm';
-import { MatchData, rankInfo, summoner } from '@/types/res';
+import {
+  MatchData,
+  OpggSummarization1Type,
+  OpggSummarizationType,
+  rankInfo,
+  summoner,
+} from '@/types/res';
 import cards from '@/utils/card/cards';
 import { renderStylesToString } from '@emotion/server';
 import { useRouter } from 'next/router';
 import { renderToString } from 'react-dom/server';
 import type { QueueType } from '@/types/res';
-import { champions } from '@/utils/championImgLoader';
-
-interface ChampionType {
-  name: string;
-  wins: number;
-  losses: number;
-  kills: number;
-  assits: number;
-  deaths: number;
-}
-
-interface OpggSummarizationType {
-  wins: number;
-  losses: number;
-  kills: number;
-  deaths: number;
-  assists: number;
-  roles: number[];
-  champions: Map<string, ChampionType>;
-}
-
-interface OpggSummarization1Type {
-  wins: number;
-  losses: number;
-  kills: number;
-  deaths: number;
-  assists: number;
-  roles: number[];
-  champions: ChampionType[];
-}
+import { OpggSummarizatoinCard } from '@/utils/card/opggSummarizaion';
 
 export default function DesignPage({ res }: { res: OpggSummarization1Type }) {
-  console.log(res);
   const router = useRouter();
   // const queueType = router.query.queueType ?? ('RANKED_SOLO_5x5' as QueueType);
   const handleSubmit = (e: React.SyntheticEvent) => {
@@ -53,22 +29,22 @@ export default function DesignPage({ res }: { res: OpggSummarization1Type }) {
     });
   };
 
+  const sortedChamps = res.champions.sort((l, r) =>
+    l.wins + l.losses === r.wins + r.losses
+      ? 0
+      : l.wins + l.losses < r.wins + r.losses
+      ? 1
+      : -1,
+  );
+
+  const data = { ...res, champions: sortedChamps };
   // const user = userInfo.find((item) => item.queueType === queueType);
 
   return (
     <>
       <SEO />
       <SearchForm handleSubmit={handleSubmit} />
-      {/* {cards.map(({ Main, Null }) => (
-        <div
-          key={Main.name}
-          dangerouslySetInnerHTML={{
-            __html: renderStylesToString(
-              renderToString(user ? <Main {...user} /> : <Null />),
-            ),
-          }}
-        />
-      ))} */}
+      {res && <OpggSummarizatoinCard {...data} />}
     </>
   );
 }
@@ -89,7 +65,7 @@ export async function getServerSideProps(context: {
     },
   ).then((res) => res.json());
   const matchInfo: MatchData = await fetch(
-    `https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/${so.puuid}/ids?start=0&count=10`,
+    `https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/${so.puuid}/ids?start=0&count=20`,
     {
       headers: {
         'X-Riot-Token': API_KEY,

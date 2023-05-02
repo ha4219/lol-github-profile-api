@@ -26,7 +26,3 @@
 ![골 드](https://lol-github-profile-api.vercel.app/api/solvedac?name=골%20드)
 ![한세유](https://lol-github-profile-api.vercel.app/api/solvedac?name=한세유)
 ![부산푸우](https://lol-github-profile-api.vercel.app/api/solvedac?name=부산푸우)
-
-## TFT
-
-![휴학생인권운동가](https://lol-github-profile-api.vercel.app/api/opgg?name=%ED%9C%B4%ED%95%99%EC%83%9D%EC%9D%B8%EA%B6%8C%EC%9A%B4%EB%8F%99%EA%B0%80&queueType=RANKED_TFT)

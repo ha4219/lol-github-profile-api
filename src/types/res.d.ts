@@ -27,3 +27,32 @@ export interface rankInfo {
 
 export type MatchData = string[];
 export type MatchDetail = {};
+
+interface ChampionType {
+  name: string;
+  wins: number;
+  losses: number;
+  kills: number;
+  assits: number;
+  deaths: number;
+}
+
+interface OpggSummarizationType {
+  wins: number;
+  losses: number;
+  kills: number;
+  deaths: number;
+  assists: number;
+  roles: number[];
+  champions: Map<string, ChampionType>;
+}
+
+interface OpggSummarization1Type {
+  wins: number;
+  losses: number;
+  kills: number;
+  deaths: number;
+  assists: number;
+  roles: number[];
+  champions: ChampionType[];
+}
