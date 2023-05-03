@@ -2,7 +2,7 @@
 
 ## TODO
 
-- [V] make opgg summarization card
+- [x] make opgg summarization card
 - [ ] connect cache server
 
 ## op.gg
