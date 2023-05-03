@@ -127,6 +127,7 @@ export function SovledDotAcCard({
           className="background"
         />
         <text
+          style={{ textTransform: 'capitalize' }}
           xmlns="http://www.w3.org/2000/svg"
           x="315"
           y="50"
